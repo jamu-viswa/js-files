@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+        <body>
+            <input type="search" id="search" placeholder="Searching..">
+            <button id="btn" >Loading </button>
+            <div id="container" ></div>
+            <script>
+                const search =  document.getElementById("search");
+                const button = document.getElementById("btn");
+                const container = document.getElementById("container");
+                button.addEventListener("click",function(){
+                    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search.value}`)
+                    .then(res=>res.json())
+                    .then(data=>{
+                        container.innerHTML="";
+                        data.meals.forEach(meal=>{
+                            const div = document.createElement("div");
+                            div.innerHTML = 
+                            `<h1>${meal.strMeal}</h1>
+                            <img src = "${meal.strMealThumb}">`
+                            container.appendChild(div);
+                        });
+                    })
+                })
+                </script>
+        </body>
+</html>
+
